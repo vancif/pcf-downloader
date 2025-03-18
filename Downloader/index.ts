@@ -5,7 +5,20 @@ export class Downloader implements ComponentFramework.StandardControl<IInputs, I
     private container: HTMLDivElement;
     private base64: string;
     private name: string;
-    private innerHTML: string;
+    private downloadTS: string;
+    private oldDownloadTS: string;
+
+    private render(): void {
+        this.container.innerHTML = "";
+        const button = document.createElement("a");
+        button.href=this.base64;
+        button.download=this.name;
+        this.container.appendChild(button);
+        if (this.downloadTS != this.oldDownloadTS) {
+            button.click();
+            this.oldDownloadTS = this.downloadTS;
+        }
+    }
 
     /**
      * Empty constructor.
@@ -29,12 +42,8 @@ export class Downloader implements ComponentFramework.StandardControl<IInputs, I
 
         this.base64 = context.parameters.base64.raw || "";
         this.name = context.parameters.name.raw || "";
-        this.innerHTML = context.parameters.innerHTML.raw || "";
-        this.render();
-    }
-
-    private render(): void {
-        this.container.innerHTML = `<a download="${this.name}" href="${this.base64}">${this.innerHTML}</a>`;
+        this.downloadTS = context.parameters.download.raw || "False";
+        this.oldDownloadTS = this.downloadTS;
     }
 
 
@@ -46,7 +55,7 @@ export class Downloader implements ComponentFramework.StandardControl<IInputs, I
     {
         this.base64 = context.parameters.base64.raw || "";
         this.name = context.parameters.name.raw || "";
-        this.innerHTML = context.parameters.innerHTML.raw || "";
+        this.downloadTS = context.parameters.download.raw || "False";
         this.render();
     }
 

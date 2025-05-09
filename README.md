@@ -21,7 +21,7 @@ Il controllo utilizza tre parametri in ingresso:
 ## Logica del Componente
 - Il componente crea dinamicamente un elemento `<a>` con l'attributo `href` impostato sulla stringa Base64.
 - Quando il valore di `download` cambia, il pulsante viene attivato automaticamente tramite `click()`, avviando il download. Il valore di `download` viene salvato per evitare attivazioni ripetute inutili. Per esempio, è possibile assegnare a `download` il valore di `Text(Now();"yyyy-mm-dd hh:mm:ss")` per triggerare il download.
-- Il componente non ha volutamente UI, in quanto NON deve essere nascosto, altrimenti non funziona correttamente. Perché? Boh, chiedete a Microsoft.
+- Il componente non ha volutamente UI, è completamente trasparente. Si raccomanda di **non nasconderlo** (lasciare la proprietà ```Visible``` su ```True```, altrimenti non funziona correttamente.
 
 ## Note
 - Il controllo non esegue validazioni sui dati Base64. Assicurarsi che siano ben formattati.
